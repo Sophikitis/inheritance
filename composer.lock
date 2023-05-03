@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1144acfc7e3bbed68ca9ad2b731a5787",
+    "content-hash": "c5d1317597f29ca45ad07cc11ae094ae",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1457,6 +1457,62 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "infinite-networks/form-bundle",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
+                "reference": "e175957c8b57843be789d2393efb2eb149c65bb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/e175957c8b57843be789d2393efb2eb149c65bb8",
+                "reference": "e175957c8b57843be789d2393efb2eb149c65bb8",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.3 || ^3.0",
+                "ext-json": "*",
+                "php": ">=7.2",
+                "symfony/form": "^4.0 || ^5.0  || ^6.0",
+                "symfony/framework-bundle": "^4.0 || ^5.0  || ^6.0",
+                "twig/twig": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^2.0",
+                "doctrine/orm": "^2.3",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "symfony/mime": "^4.0 || ^5.0  || ^6.0",
+                "symfony/phpunit-bridge": "^4.0 || ^5.0  || ^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Infinite\\FormBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan McLean"
+                }
+            ],
+            "description": "A collection of useful form types and extensions for Symfony",
+            "support": {
+                "issues": "https://github.com/infinite-networks/InfiniteFormBundle/issues",
+                "source": "https://github.com/infinite-networks/InfiniteFormBundle/tree/3.3.0"
+            },
+            "time": "2023-04-30T22:56:54+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6996,6 +7052,79 @@
                 }
             ],
             "time": "2023-02-14T08:44:56+00:00"
+        },
+        {
+            "name": "symfony/webpack-encore-bundle",
+            "version": "v1.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/webpack-encore-bundle.git",
+                "reference": "1862d71e483769b40278548a30e756ce13ef9d4c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/1862d71e483769b40278548a30e756ce13ef9d4c",
+                "reference": "1862d71e483769b40278548a30e756ce13ef9d4c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+                "symfony/asset": "^4.4 || ^5.0 || ^6.0",
+                "symfony/config": "^4.4 || ^5.0 || ^6.0",
+                "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0",
+                "symfony/deprecation-contracts": "^2.1 || ^3.0",
+                "symfony/http-kernel": "^4.4 || ^5.0 || ^6.0",
+                "symfony/polyfill-php80": "^1.25.0",
+                "symfony/service-contracts": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0",
+                "symfony/phpunit-bridge": "^5.3 || ^6.0",
+                "symfony/twig-bundle": "^4.4 || ^5.0 || ^6.0",
+                "symfony/web-link": "^4.4 || ^5.0 || ^6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/webpack-encore",
+                    "url": "https://github.com/symfony/webpack-encore"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\WebpackEncoreBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Integration with your Symfony app & Webpack Encore!",
+            "support": {
+                "issues": "https://github.com/symfony/webpack-encore-bundle/issues",
+                "source": "https://github.com/symfony/webpack-encore-bundle/tree/v1.16.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-01-18T19:37:55+00:00"
         },
         {
             "name": "symfony/yaml",

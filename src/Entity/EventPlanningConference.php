@@ -6,7 +6,7 @@ use App\Repository\EvtConferenceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvtConferenceRepository::class)]
-class EvtConference extends Evt
+class EventPlanningConference extends EventPlanning
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

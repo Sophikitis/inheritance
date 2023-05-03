@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% form_theme form.eventsPlanning _self %}
+
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+
+{% block infinite_form_polycollection_row %}
+    {% set collectionForm = form %}
+    <hr>
+    <div class="collection collection-autoinitialize" data-remove-selector="> .item > .row > div > a.remove_item">
+        <div class="clearfix">
+            <div class="pull-left">
+                {{ form_label(collectionForm, 'Invoice lines') }}
+            </div>
+            <div class="pull-right">
+                {% set form = prototypes.type_sport %}
+                <a href="#" data-prototype="{{ block('entry_row') | escape }}" class="btn btn-success add_item" aria-label="Add freight line"><i class="glyphicon glyphicon-plus"></i> Freight line</a>
+                {% set form = prototypes.type_conference %}
+                <a href="#" data-prototype="{{ block('entry_row') | escape }}" class="btn btn-success add_item" aria-label="Add product line"><i class="glyphicon glyphicon-plus"></i> Product line</a>
+            </div>
+        </div>
+        <div class="items">
+            {% for form in collectionForm %}
+                {{ block('entry_row') }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block entry_row %}
+    <div class="item">
+        <hr>
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block sport_widget %}
+    <div class="row">
+        <div class="col-md-6">{{ form_row(form.name) }}</div>
+        <div class="col-md-2">{{ form_row(form.code) }}</div>
+        <div class="col-md-2 text-right">
+            <label>&nbsp;</label><br>
+            <a href="#" class="btn btn-danger remove_item">
+                <i class="glyphicon glyphicon-minus"></i> Remove
+            </a>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+{% endblock %}
+
+{% block conference_widget %}
+    <div class="row">
+        <div class="col-md-6">{{ form_row(form.name) }}</div>
+        <div class="col-md-2">{{ form_row(form.code) }}</div>
+        <div class="col-md-2">{{ form_row(form.speaker) }}</div>
+        <div class="col-md-2 text-right">
+            <label>&nbsp;</label><br>
+            <a href="#" class="btn btn-danger remove_item">
+                <i class="glyphicon glyphicon-minus"></i> Remove
+            </a>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+{% endblock %}
+
+

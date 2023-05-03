@@ -2,9 +2,9 @@
 
 namespace App\Command;
 
-use App\Entity\Evt;
-use App\Entity\EvtConference;
-use App\Entity\EvtSport;
+use App\Entity\EventPlanning;
+use App\Entity\EventPlanningConference;
+use App\Entity\EventPlanningSport;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -37,14 +37,14 @@ class TestCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 		// create new evtSport with Evt entity parent field
-		$eventSport = new EvtSport();
+		$eventSport = new EventPlanningSport();
 		$eventSport->setName('sport');
 		$eventSport->setCode('sport');
 		$eventSport->setOpponentTeamName('opponent');
 		$eventSport->setOpponentTeamLogo('logo');
 
 		// create new evtConference with Evt entity parent field
-		$eventConference = new EvtConference();
+		$eventConference = new EventPlanningConference();
 		$eventConference->setName('conference');
 		$eventConference->setCode('conference');
 		$eventConference->setSpeaker('speaker');
@@ -57,12 +57,12 @@ class TestCommand extends Command
 
 
 	    // retrieve all events
-		$eventRepo = $this->em->getRepository(Evt::class);
+		$eventRepo = $this->em->getRepository(EventPlanning::class);
 
 		// retrieve all events of type sport
-		$eventSportRepo = $this->em->getRepository(EvtSport::class);
+		$eventSportRepo = $this->em->getRepository(EventPlanningSport::class);
 		// retrieve all event of type conference
-		$eventConfRepo = $this->em->getRepository(EvtConference::class);
+		$eventConfRepo = $this->em->getRepository(EventPlanningConference::class);
 
 		/*
 		 * 1 - retrieve all events
@@ -75,7 +75,7 @@ class TestCommand extends Command
 		$eventRepoResSport = $eventRepo->createQueryBuilder('e')
 			->select('e')
 			->where('e INSTANCE OF :evtSport')
-			->setParameter('evtSport', $this->em->getClassMetadata(EvtSport::class))
+			->setParameter('evtSport', $this->em->getClassMetadata(EventPlanningSport::class))
 			->getQuery()
 			->getResult();
 

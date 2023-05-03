@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\EvtConference;
+use App\Entity\EventPlanningConference;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<EvtConference>
+ * @extends ServiceEntityRepository<EventPlanningConference>
  *
- * @method EvtConference|null find($id, $lockMode = null, $lockVersion = null)
- * @method EvtConference|null findOneBy(array $criteria, array $orderBy = null)
- * @method EvtConference[]    findAll()
- * @method EvtConference[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EventPlanningConference|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EventPlanningConference|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EventPlanningConference[]    findAll()
+ * @method EventPlanningConference[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EvtConferenceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EvtConference::class);
+        parent::__construct($registry, EventPlanningConference::class);
     }
 
-    public function save(EvtConference $entity, bool $flush = false): void
+    public function save(EventPlanningConference $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class EvtConferenceRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(EvtConference $entity, bool $flush = false): void
+    public function remove(EventPlanningConference $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
