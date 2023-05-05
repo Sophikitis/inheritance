@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\EventPlanning;
+use App\Entity\EventPlanningProduct;
 use App\Entity\Products;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -16,6 +17,14 @@ class EventPlanningType extends AbstractType
         $builder
             ->add('name')
             ->add('code')
+	        ->add('eventPlanningProducts', CollectionType::class, [
+		        'entry_type' => EventPlanningProductType::class,
+		        'entry_options' => ['label' => false],
+		        'allow_add' => true,
+		        'allow_delete' => true,
+		        'by_reference' => false,
+		        'data' => [ new EventPlanningProduct()]
+	        ])
         ;
     }
 

@@ -3,8 +3,6 @@
 {% block title %}Hello EventController!{% endblock %}
 
 {% form_theme form.eventsPlanning _self %}
-
-
 {% block body %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -45,14 +43,24 @@
 
 {% block sport_widget %}
     <div class="row">
-        <div class="col-md-6">{{ form_row(form.name) }}</div>
-        <div class="col-md-2">{{ form_row(form.code) }}</div>
         <div class="col-md-2 text-right">
             <label>&nbsp;</label><br>
             <a href="#" class="btn btn-danger remove_item">
                 <i class="glyphicon glyphicon-minus"></i> Remove
             </a>
         </div>
+        <div class="col-md-12">{{ form_row(form.name) }}</div>
+        <div class="col-md-12">{{ form_row(form.code) }}</div>
+        <div class="col-md-12">{{ form_row(form.opponentTeamName) }}</div>
+        <div class="col-md-12">{{ form_row(form.OpponentTeamLogo) }}</div>
+        <ul class="tags"
+            data-index="{{ form.eventPlanningProducts|length > 0 ? form.eventPlanningProducts|last.vars.name + 1 : 0 }}"
+            data-prototype="{{ form_widget(form.eventPlanningProducts.vars.prototype)|e('html_attr') }}"
+        ></ul>
+        <button type="button" class="add_item_link" data-collection-holder-class="tags">Add a tag</button>
+
+
+
     </div>
     {{ form_rest(form) }}
 {% endblock %}
@@ -73,3 +81,67 @@
 {% endblock %}
 
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script>
+
+        $(document).on("click", ".add_item_link", function(e){
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+            const item = document.createElement('li');
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+
+            collectionHolder.dataset.index++;
+        });
+        // document.addEventListener("click", function(e){
+        //     const target = e.target.closest(".add_item_link"); // Or any other selector.
+        //
+        //     if(target){
+        //         console.log(target);
+        //     }
+        //
+        //     return
+        // });
+    </script>
+
+
+    <script>
+        var $sport = $('#event_eventsPlanning_0_eventPlanningProducts_0_category');
+        // When sport gets selected ...
+        // $('#event_eventsPlanning_0_eventPlanningProducts_0_category').change(function() {
+        $(document).on("change", "#event_eventsPlanning_0_eventPlanningProducts_0_category", function(e){
+            console.log('change');
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data[e.currentTarget.name] = e.currentTarget.value
+            // Submit data via AJAX to the form's action path.
+            console.log(data, $form)
+            debugger
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                complete: function(html) {
+                    // Replace current position field ...
+                    $('#event_eventsPlanning_0_eventPlanningProducts_0_product').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html.responseText).find('#event_eventsPlanning_0_eventPlanningProducts_0_product')
+                    );
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
+    </script>
+{% endblock %}

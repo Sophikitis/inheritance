@@ -43,6 +43,7 @@ class EventType extends AbstractType
 		        ),
 		        'allow_add' => true,
 		        'allow_delete' => true,
+		        'data' =>  [ new EventPlanningSport()]
 	        ])
 	        ->add('submit', SubmitType::class, ['label' => 'Create'])
         ;

@@ -21,12 +21,13 @@ class Products
     #[ORM\Column(length: 255)]
     private ?string $price = null;
 
-    #[ORM\ManyToMany(targetEntity: EventPlanning::class, mappedBy: 'product')]
-    private Collection $eventPlannings;
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: EventPlanningProduct::class)]
+    private Collection $eventPlanningProducts;
+
 
     public function __construct()
     {
-        $this->eventPlannings = new ArrayCollection();
+        $this->eventPlanningProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,29 +60,33 @@ class Products
     }
 
     /**
-     * @return Collection<int, EventPlanning>
+     * @return Collection<int, EventPlanningProduct>
      */
-    public function getEventPlannings(): Collection
+    public function getEventPlanningProducts(): Collection
     {
-        return $this->eventPlannings;
+        return $this->eventPlanningProducts;
     }
 
-    public function addEventPlanning(EventPlanning $eventPlanning): self
+    public function addEventPlanningProduct(EventPlanningProduct $eventPlanningProduct): self
     {
-        if (!$this->eventPlannings->contains($eventPlanning)) {
-            $this->eventPlannings->add($eventPlanning);
-            $eventPlanning->addProduct($this);
+        if (!$this->eventPlanningProducts->contains($eventPlanningProduct)) {
+            $this->eventPlanningProducts->add($eventPlanningProduct);
+            $eventPlanningProduct->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeEventPlanning(EventPlanning $eventPlanning): self
+    public function removeEventPlanningProduct(EventPlanningProduct $eventPlanningProduct): self
     {
-        if ($this->eventPlannings->removeElement($eventPlanning)) {
-            $eventPlanning->removeProduct($this);
+        if ($this->eventPlanningProducts->removeElement($eventPlanningProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($eventPlanningProduct->getProduct() === $this) {
+                $eventPlanningProduct->setProduct(null);
+            }
         }
 
         return $this;
     }
+
 }

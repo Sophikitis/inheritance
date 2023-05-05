@@ -27,12 +27,14 @@ class EventPlanning
     #[ORM\ManyToOne(inversedBy: 'eventsPlanning')]
     private ?Event $event = null;
 
-    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'eventPlannings')]
-    private Collection $product;
+    #[ORM\OneToMany(mappedBy: 'eventPlanning', targetEntity: EventPlanningProduct::class)]
+    private Collection $eventPlanningProducts;
+
+
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
+        $this->eventPlanningProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,26 +79,33 @@ class EventPlanning
     }
 
     /**
-     * @return Collection<int, Products>
+     * @return Collection<int, EventPlanningProduct>
      */
-    public function getProduct(): Collection
+    public function getEventPlanningProducts(): Collection
     {
-        return $this->product;
+        return $this->eventPlanningProducts;
     }
 
-    public function addProduct(Products $product): self
+    public function addEventPlanningProduct(EventPlanningProduct $eventPlanningProduct): self
     {
-        if (!$this->product->contains($product)) {
-            $this->product->add($product);
+        if (!$this->eventPlanningProducts->contains($eventPlanningProduct)) {
+            $this->eventPlanningProducts->add($eventPlanningProduct);
+            $eventPlanningProduct->setEventPlanning($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Products $product): self
+    public function removeEventPlanningProduct(EventPlanningProduct $eventPlanningProduct): self
     {
-        $this->product->removeElement($product);
+        if ($this->eventPlanningProducts->removeElement($eventPlanningProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($eventPlanningProduct->getEventPlanning() === $this) {
+                $eventPlanningProduct->setEventPlanning(null);
+            }
+        }
 
         return $this;
     }
+
 }
