@@ -27,7 +27,7 @@ class EventPlanning
     #[ORM\ManyToOne(inversedBy: 'eventsPlanning')]
     private ?Event $event = null;
 
-    #[ORM\OneToMany(mappedBy: 'eventPlanning', targetEntity: EventPlanningProduct::class)]
+    #[ORM\OneToMany(mappedBy: 'eventPlanning', targetEntity: EventPlanningProduct::class, cascade: ['persist'])]
     private Collection $eventPlanningProducts;
 
 

@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Factory\EventPlanningHandlerInterface;
 use App\Repository\EvtConferenceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvtConferenceRepository::class)]
-class EventPlanningConference extends EventPlanning
+class EventPlanningConference extends EventPlanning implements EventPlanningHandlerInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

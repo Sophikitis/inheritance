@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Entity\EventPlanning;
 use App\Entity\Products;
+use App\Factory\EventFactory;
+use App\Factory\EventPlanningFactory;
 use App\Form\EventType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,10 +19,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     #[Route('/', name: 'app_event')]
-    public function index(Request $request, EntityManagerInterface $entity): Response
+    public function index(Request $request, EntityManagerInterface $entity, EventFactory $eventPlanningFactory): Response
     {
 
-
+dd($eventPlanningFactory->create('sport'));
 		$event = new Event();
 
 //		$eventPlanning = new EventPlanning();
@@ -30,7 +32,10 @@ class EventController extends AbstractController
 	    $form = $this->createForm(EventType::class, $event);
 	    $form->handleRequest($request);
 	    if ($form->isSubmitted() && $form->isValid()) {
-			dd($event);
+
+			$entity->persist($event);
+		    $entity->flush();
+		    return $this->redirectToRoute('app_event');
 
 	    }
 

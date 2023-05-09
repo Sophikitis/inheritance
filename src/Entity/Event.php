@@ -18,7 +18,7 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $label = null;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventPlanning::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventPlanning::class, cascade: ['persist'])]
     private Collection $eventsPlanning;
 
     #[ORM\Column(length: 255)]

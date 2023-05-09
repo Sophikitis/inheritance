@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Factory\EventPlanningHandlerInterface;
 use App\Repository\EventPlanningProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
